@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="RollingFile-Appender"
+                     fileName="${log-path}/shaker.log"
+                     filePattern="${log-path}/shaker_%d{yyyy-MM-dd_HH-mm-ss}.log">
+            <PatternLayout pattern="%d{yy/MM/dd HH:mm:ss.SSS} %-5p %c{1}(line %L): %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1800"/> <!-- 30 minutes in seconds -->
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="bukkaa.mediahouse.ShakerGameWS" level="debug" additivity="false">
+            <AppenderRef ref="RollingFile-Appender"/>
+        </Logger>
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="RollingFile-Appender"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="RollingFile-Appender"/>
+        </Root>
+    </Loggers>
+</Configuration>

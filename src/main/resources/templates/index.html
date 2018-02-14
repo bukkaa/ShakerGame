@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=320, user-scalable=no" />
+    <meta charset="UTF-8" />
+    <title>Трясучки</title>
+    <script th:src="@{js/ShakerScript.js}" async="async"></script>
+</head>
+
+<style th:inline="text">
+    #play_page {
+        font: 600 20px "Roboto", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /*color: #0002ff;*/
+        text-align: center;
+        visibility: hidden;
+        position: fixed;
+        top: 20%;
+        width: 95%;
+        z-index: 2;
+    }
+    #wait_page {
+        font: 600 20px "Roboto", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /*color: #0002ff;*/
+        text-align: center;
+        visibility: hidden;
+        position: fixed;
+        top: 20%;
+        width: 95%;
+        z-index: 3;
+    }
+    #finish_page {
+        font: 600 20px "Roboto", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /*color: #0002ff;*/
+        text-align: center;
+        visibility: hidden;
+        position: fixed;
+        top: 20%;
+        width: 95%;
+        z-index: 4;
+    }
+    #sign_up_form {
+        visibility: visible;
+        position: fixed;
+        top: 2%;
+        z-index: 1;
+    }
+    form {
+        margin-left: 20px;
+    }
+    body {
+        background: url([[${background_img}]]), linear-gradient(#00deff, #ffffff 80%) no-repeat, #ffffff;
+        background-size: cover;
+        height: 600px;
+        font: 1.3em "Roboto", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #ffe400;
+    }
+    .choiceElement {
+        width: 140px;
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <div id = "sign_up_form">
+        <div id = "play_page">Трясите телефон по команде ведущего<br/><br/>Не обновляйте, не выключайте телефон до конца игры</div>
+        <div id = "wait_page">ЗАГРУЗКА...</div>
+        <div id = "finish_page">КОНЕЦ ИГРЫ!</div>
+        <form method="post">
+            <p>Как тебя зовут?<br/>
+                <input name="name" type="text" autocomplete="off" autofocus="autofocus" />
+            </p>
+            <p>Выбери персонажа</p>
+
+            <div th:each="sprite : ${sprites}" class="choiceElement" style="margin-left: -17px;">
+                <label>
+                    <input th:value="${sprite.key}" name="tex" type="radio" />
+                    <img th:src="${sprite.value}" th:alt="${sprite.key}" height="85px" align="top"/>
+                </label>
+            </div>
+
+            <p style="text-align: center">
+                <input type="button" value="Поехали!" style="font-size: 18px; color: #000; margin-left: -25px" onclick="signUp(form.elements.name.value, form.elements.tex.value)" />
+            </p>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
